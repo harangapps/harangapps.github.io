@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Harang Apps · 하랑 앱스</title>
+<meta name="description" content="Harang - simple, friendly Chrome extensions and mini games. 하랑 - 가볍고 친근한 크롬 확장프로그램과 미니게임.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>">
+<style>
+  :root { --bg:#f7f6fb; --card:#fff; --ink:#26233a; --muted:#6d6a82; --accent:#5b5bd6; --accent2:#8e7cf0; --line:#e6e3f2; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:-apple-system,"Segoe UI","Apple SD Gothic Neo","Malgun Gothic",sans-serif; background:var(--bg); color:var(--ink); line-height:1.6; }
+  header { background:linear-gradient(135deg,var(--accent),var(--accent2)); color:#fff; padding:56px 20px 64px; text-align:center; position:relative; }
+  header h1 { margin:0 0 8px; font-size:2.2rem; letter-spacing:-0.5px; }
+  header p { margin:0; opacity:.92; font-size:1.05rem; }
+  .lang { position:absolute; top:14px; right:16px; }
+  .lang button { background:rgba(255,255,255,.18); color:#fff; border:1px solid rgba(255,255,255,.4); border-radius:20px; padding:4px 12px; cursor:pointer; font-size:.85rem; }
+  .lang button[aria-pressed="true"] { background:#fff; color:var(--accent); }
+  main { max-width:1000px; margin:-32px auto 0; padding:0 16px 40px; }
+  h2 { font-size:1.25rem; margin:36px 4px 14px; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:16px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:16px; padding:20px; display:flex; flex-direction:column; gap:8px; box-shadow:0 2px 10px rgba(60,50,120,.05); }
+  .card .top { display:flex; align-items:center; gap:12px; }
+  .card .ic { font-size:2rem; width:52px; height:52px; display:grid; place-items:center; background:#efedfb; border-radius:14px; }
+  .card h3 { margin:0; font-size:1.05rem; }
+  .tag { display:inline-block; font-size:.72rem; font-weight:600; color:#1f7a4d; background:#e3f6ec; border-radius:10px; padding:1px 8px; }
+  .card p { margin:0; color:var(--muted); font-size:.92rem; flex:1; }
+  .card .links { display:flex; gap:8px; flex-wrap:wrap; margin-top:6px; }
+  .btn { font-size:.85rem; text-decoration:none; border-radius:10px; padding:6px 12px; border:1px solid var(--line); color:var(--ink); background:#fff; }
+  .btn.primary { background:var(--accent); color:#fff; border-color:var(--accent); }
+  .btn.soon { background:#f0eff5; color:var(--muted); pointer-events:none; }
+  #news .item { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:12px 16px; margin-bottom:10px; }
+  #news .date { color:var(--muted); font-size:.8rem; }
+  #news .item b { display:block; }
+  footer { text-align:center; color:var(--muted); font-size:.85rem; padding:30px 16px 40px; border-top:1px solid var(--line); }
+  footer a { color:var(--accent); }
+</style>
+</head>
+<body>
+<header>
+  <div class="lang"><button data-l="ko">한국어</button> <button data-l="en">English</button></div>
+  <h1>🌿 Harang</h1>
+  <p data-ko="가볍고 친근한 크롬 확장프로그램과 미니게임" data-en="Simple, friendly Chrome extensions and mini games"></p>
+</header>
+
+<main>
+  <h2 data-ko="🆓 무료 확장프로그램" data-en="🆓 Free extensions"></h2>
+  <div class="grid" id="products"></div>
+
+  <h2 data-ko="📰 하랑 소식" data-en="📰 Harang News"></h2>
+  <div id="news"></div>
+</main>
+
+<footer>
+  <p><a href="privacy.html" data-ko="개인정보처리방침" data-en="Privacy Policy"></a> · <a href="mailto:infedo09@naver.com">infedo09@naver.com</a></p>
+  <p>© 2026 Harang</p>
+</footer>
+
+<script>
+// ▼ 웹스토어 승인 후 store 칸에 주소만 넣으면 "설치하기" 버튼이 켜져요
+const PRODUCTS = [
+  { id:'baseball', e:'⚾', name:{ ko:'하랑 숫자야구', en:'Harang Number Baseball' }, desc:{ ko:'숨은 숫자를 맞히는 두뇌 게임. 스트라이크·볼 힌트로 추리해 보세요.', en:'Guess the hidden number using strike & ball hints. A quick brain teaser.' }, store:'' },
+  { id:'puzzle',   e:'🧩', name:{ ko:'하랑 슬라이딩 퍼즐', en:'Harang Sliding Puzzle' }, desc:{ ko:'타일을 밀어 순서대로 맞추는 클래식 퍼즐.', en:'The classic slide-the-tiles puzzle.' }, store:'' },
+  { id:'volume',   e:'🔊', name:{ ko:'하랑 볼륨 부스터', en:'Harang Volume Booster' }, desc:{ ko:'작게 들리는 탭 소리를 최대 600%까지 키워요.', en:'Boost the volume of any tab up to 600%.' }, store:'' },
+  { id:'sudoku',   e:'🔢', name:{ ko:'하랑 스도쿠', en:'Harang Sudoku' }, desc:{ ko:'난이도별로 즐기는 스도쿠. 사이드패널에서 바로.', en:'Sudoku with multiple difficulty levels, right in the side panel.' }, store:'' },
+  { id:'allcalc',  e:'🧮', name:{ ko:'하랑 AllCalc', en:'Harang AllCalc' }, desc:{ ko:'계산기와 단위 변환을 한곳에. 나라별 단위도 지원해요.', en:'Calculator and unit converter in one, including regional units.' }, store:'' },
+  { id:'reversi',  e:'⚫', name:{ ko:'하랑 리버시', en:'Harang Reversi' }, desc:{ ko:'돌을 뒤집어 판을 차지하는 전략 게임. 여러 판 크기 지원.', en:'Flip discs to take the board. Several board sizes.' }, store:'' },
+  { id:'komok',    e:'⚪', name:{ ko:'하랑 K-Omok', en:'Harang K-Omok' }, desc:{ ko:'다섯 개를 먼저 잇는 한국식 오목.', en:'Korean-style five-in-a-row (Omok).' }, store:'' }
+];
+
+let lang = (localStorage.getItem('lang') || (navigator.language || 'en')).startsWith('ko') ? 'ko' : 'en';
+
+function render() {
+  document.documentElement.lang = lang;
+  document.querySelectorAll('[data-ko]').forEach((el) => { el.textContent = el.dataset[lang]; });
+  document.querySelectorAll('.lang button').forEach((b) => b.setAttribute('aria-pressed', b.dataset.l === lang));
+  const L = lang === 'ko'
+    ? { free:'무료', install:'설치하기', soon:'곧 출시', privacy:'개인정보' }
+    : { free:'Free', install:'Install', soon:'Coming soon', privacy:'Privacy' };
+  document.getElementById('products').innerHTML = PRODUCTS.map((p) => `
+    <div class="card" id="${p.id}">
+      <div class="top"><div class="ic">${p.e}</div><div><h3>${p.name[lang]}</h3><span class="tag">${L.free}</span></div></div>
+      <p>${p.desc[lang]}</p>
+      <div class="links">
+        ${p.store ? `<a class="btn primary" href="${p.store}" target="_blank" rel="noopener">${L.install}</a>` : `<span class="btn soon">${L.soon}</span>`}
+        <a class="btn" href="privacy.html#${p.id}">${L.privacy}</a>
+      </div>
+    </div>`).join('');
+  renderNews();
+}
+
+let NEWS = null;
+function renderNews() {
+  const box = document.getElementById('news');
+  if (!NEWS) { box.innerHTML = ''; return; }
+  const pick = (o) => (o && (o[lang] || o.en || o.ko)) || '';
+  box.innerHTML = NEWS.items.slice(0, 5).map((n) => `
+    <div class="item"><span class="date">${n.date}</span><b>${pick(n.title)}</b><span>${pick(n.body)}</span></div>`).join('');
+}
+
+document.querySelectorAll('.lang button').forEach((b) => b.onclick = () => { lang = b.dataset.l; localStorage.setItem('lang', lang); render(); });
+fetch('news.json', { cache:'no-store' }).then((r) => r.json()).then((j) => { NEWS = j; renderNews(); }).catch(() => {});
+render();
+</script>
+</body>
+</html>

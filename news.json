@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "updated": "2026-11-14",
+  "items": [
+    {
+      "id": "2026-11-14-welcome",
+      "date": "2026-11-14",
+      "type": "notice",
+      "target": "all",
+      "title": {
+        "ko": "하랑 홈페이지가 열렸어요! 🌿",
+        "en": "The Harang website is open! 🌿"
+      },
+      "body": {
+        "ko": "하랑의 무료 확장프로그램을 한곳에서 만나 보세요.",
+        "en": "Find all Harang free extensions in one place."
+      },
+      "url": "https://harangapps.github.io/"
+    }
+  ]
+}
