@@ -21,7 +21,7 @@
   .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:16px; }
   .card { background:var(--card); border:1px solid var(--line); border-radius:16px; padding:20px; display:flex; flex-direction:column; gap:8px; box-shadow:0 2px 10px rgba(60,50,120,.05); }
   .card .top { display:flex; align-items:center; gap:12px; }
-  .card .ic { font-size:2rem; width:52px; height:52px; display:grid; place-items:center; background:#efedfb; border-radius:14px; }
+  .card .ic { width:56px; height:56px; border-radius:14px; flex:none; }
   .card h3 { margin:0; font-size:1.05rem; }
   .tag { display:inline-block; font-size:.72rem; font-weight:600; color:#1f7a4d; background:#e3f6ec; border-radius:10px; padding:1px 8px; }
   .card p { margin:0; color:var(--muted); font-size:.92rem; flex:1; }
@@ -79,7 +79,7 @@ function render() {
     : { free:'Free', install:'Install', soon:'Coming soon', privacy:'Privacy' };
   document.getElementById('products').innerHTML = PRODUCTS.map((p) => `
     <div class="card" id="${p.id}">
-      <div class="top"><div class="ic">${p.e}</div><div><h3>${p.name[lang]}</h3><span class="tag">${L.free}</span></div></div>
+      <div class="top"><img class="ic" src="icons/${p.id}.png" alt=""><div><h3>${p.name[lang]}</h3><span class="tag">${L.free}</span></div></div>
       <p>${p.desc[lang]}</p>
       <div class="links">
         ${p.store ? `<a class="btn primary" href="${p.store}" target="_blank" rel="noopener">${L.install}</a>` : `<span class="btn soon">${L.soon}</span>`}
