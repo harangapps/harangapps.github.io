@@ -22,6 +22,9 @@
   .card { background:var(--card); border:1px solid var(--line); border-radius:16px; padding:20px; display:flex; flex-direction:column; gap:8px; box-shadow:0 2px 10px rgba(60,50,120,.05); }
   .card .top { display:flex; align-items:center; gap:12px; }
   .card .ic { width:56px; height:56px; border-radius:14px; flex:none; }
+  .card .ic.emoji { display:grid; place-items:center; font-size:2rem; background:#efedfb; }
+  a.card.recipe { text-decoration:none; color:inherit; transition:transform .15s; } a.card.recipe:hover { transform:translateY(-2px); }
+  .tag.soon-tag { color:#8a5a00; background:#fff1d0; }
   .card h3 { margin:0; font-size:1.05rem; }
   .tag { display:inline-block; font-size:.72rem; font-weight:600; color:#1f7a4d; background:#e3f6ec; border-radius:10px; padding:1px 8px; }
   .card p { margin:0; color:var(--muted); font-size:.92rem; flex:1; }
@@ -47,6 +50,22 @@
   <h2 data-ko="🆓 무료 확장프로그램" data-en="🆓 Free extensions"></h2>
   <div class="grid" id="products"></div>
 
+  <h2 data-ko="🍳 쉬운 한식 맛보기" data-en="🍳 Easy Korean Home Cooking"></h2>
+  <div class="grid">
+    <a class="card recipe" href="recipes/bulgogi.html?from=home">
+      <div class="top"><div class="ic emoji">🥩</div><div><h3 data-ko="쉬운 불고기" data-en="Easy Bulgogi"></h3><span class="tag" data-ko="15분" data-en="15 min"></span></div></div>
+      <p data-ko="간장·설탕·마늘·참기름이면 OK. 동네 마트 재료로 만드는 한국의 대표 요리." data-en="Soy sauce, sugar, garlic and sesame oil — Korea’s favorite beef dish with supermarket ingredients."></p>
+    </a>
+  </div>
+
+  <h2 id="kchef" data-ko="🍲 곧 나와요" data-en="🍲 Coming soon"></h2>
+  <div class="grid">
+    <div class="card">
+      <div class="top"><div class="ic emoji">👩‍🍳</div><div><h3 data-ko="하랑 K-셰프 빌리지" data-en="Harang K-Chef Village"></h3><span class="tag soon-tag" data-ko="준비 중" data-en="In progress"></span></div></div>
+      <p data-ko="농장에서 재료를 키우고 김치·비빔밥·잡채를 만들어 마을을 키우는 한식 요리 게임. 게임에서 만든 요리는 집에서 따라 할 수 있는 진짜 레시피 카드가 열려요." data-en="A cozy Korean cooking game: grow ingredients, cook kimchi, bibimbap and japchae, and grow your village. Every dish you make unlocks a real recipe card you can cook at home."></p>
+    </div>
+  </div>
+
   <h2 data-ko="📰 하랑 소식" data-en="📰 Harang News"></h2>
   <div id="news"></div>
 </main>
@@ -65,7 +84,8 @@ const PRODUCTS = [
   { id:'sudoku',   e:'🔢', name:{ ko:'하랑 스도쿠', en:'Harang Sudoku' }, desc:{ ko:'난이도별로 즐기는 스도쿠. 사이드패널에서 바로.', en:'Sudoku with multiple difficulty levels, right in the side panel.' }, store:'' },
   { id:'allcalc',  e:'🧮', name:{ ko:'하랑 AllCalc', en:'Harang AllCalc' }, desc:{ ko:'계산기와 단위 변환을 한곳에. 나라별 단위도 지원해요.', en:'Calculator and unit converter in one, including regional units.' }, store:'' },
   { id:'reversi',  e:'⚫', name:{ ko:'하랑 리버시', en:'Harang Reversi' }, desc:{ ko:'돌을 뒤집어 판을 차지하는 전략 게임. 여러 판 크기 지원.', en:'Flip discs to take the board. Several board sizes.' }, store:'' },
-  { id:'komok',    e:'⚪', name:{ ko:'하랑 K-Omok', en:'Harang K-Omok' }, desc:{ ko:'다섯 개를 먼저 잇는 한국식 오목.', en:'Korean-style five-in-a-row (Omok).' }, store:'' }
+  { id:'komok',    e:'⚪', name:{ ko:'하랑 K-Omok', en:'Harang K-Omok' }, desc:{ ko:'다섯 개를 먼저 잇는 한국식 오목.', en:'Korean-style five-in-a-row (Omok).' }, store:'' },
+  { id:'kyut',     e:'🎋', name:{ ko:'하랑 K-Yut', en:'Harang K-Yut' }, desc:{ ko:'가마니 위에서 즐기는 전통 윷놀이. 청팀 vs 홍팀!', en:'Traditional Korean Yut on a straw mat — play against Team Korea.' }, store:'' }
 ];
 
 let lang = (localStorage.getItem('lang') || (navigator.language || 'en')).startsWith('ko') ? 'ko' : 'en';
