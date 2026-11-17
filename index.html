@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" translate="no" class="notranslate">
 <head>
 <meta charset="utf-8">
+<meta name="google" content="notranslate">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Harang Apps · 하랑 앱스</title>
 <meta name="description" content="Harang - simple, friendly Chrome extensions and mini games. 하랑 - 가볍고 친근한 크롬 확장프로그램과 미니게임.">
@@ -78,13 +79,13 @@
 <script>
 // ▼ 웹스토어 승인 후 store 칸에 주소만 넣으면 "설치하기" 버튼이 켜져요
 const PRODUCTS = [
-  { id:'baseball', e:'⚾', name:{ ko:'하랑 숫자야구', en:'Harang Number Baseball' }, desc:{ ko:'숨은 숫자를 맞히는 두뇌 게임. 스트라이크·볼 힌트로 추리해 보세요.', en:'Guess the hidden number using strike & ball hints. A quick brain teaser.' }, store:'' },
+  { id:'baseball', e:'⚾', name:{ ko:'하랑 숫자야구', en:'Harang Number Baseball' }, desc:{ ko:'숨은 숫자를 맞히는 두뇌 게임. 스트라이크·볼 힌트로 추리해 보세요.', en:'Guess the hidden number using strike & ball hints. A quick brain teaser.' }, store:'https://chromewebstore.google.com/detail/hdjhalhafmmkkjnajlgbmdakehkbhloj' },
   { id:'puzzle',   e:'🧩', name:{ ko:'하랑 슬라이딩 퍼즐', en:'Harang Sliding Puzzle' }, desc:{ ko:'타일을 밀어 순서대로 맞추는 클래식 퍼즐.', en:'The classic slide-the-tiles puzzle.' }, store:'' },
   { id:'volume',   e:'🔊', name:{ ko:'하랑 볼륨 부스터', en:'Harang Volume Booster' }, desc:{ ko:'작게 들리는 탭 소리를 최대 600%까지 키워요.', en:'Boost the volume of any tab up to 600%.' }, store:'' },
-  { id:'sudoku',   e:'🔢', name:{ ko:'하랑 스도쿠', en:'Harang Sudoku' }, desc:{ ko:'난이도별로 즐기는 스도쿠. 사이드패널에서 바로.', en:'Sudoku with multiple difficulty levels, right in the side panel.' }, store:'' },
+  { id:'sudoku',   e:'🔢', name:{ ko:'하랑 스도쿠', en:'Harang Sudoku' }, desc:{ ko:'난이도별로 즐기는 스도쿠. 사이드패널에서 바로.', en:'Sudoku with multiple difficulty levels, right in the side panel.' }, store:'https://chromewebstore.google.com/detail/fogalepipjgfmhaigknlciojcfmldagf' },
   { id:'allcalc',  e:'🧮', name:{ ko:'하랑 AllCalc', en:'Harang AllCalc' }, desc:{ ko:'계산기와 단위 변환을 한곳에. 나라별 단위도 지원해요.', en:'Calculator and unit converter in one, including regional units.' }, store:'' },
   { id:'reversi',  e:'⚫', name:{ ko:'하랑 리버시', en:'Harang Reversi' }, desc:{ ko:'돌을 뒤집어 판을 차지하는 전략 게임. 여러 판 크기 지원.', en:'Flip discs to take the board. Several board sizes.' }, store:'' },
-  { id:'komok',    e:'⚪', name:{ ko:'하랑 K-Omok', en:'Harang K-Omok' }, desc:{ ko:'다섯 개를 먼저 잇는 한국식 오목.', en:'Korean-style five-in-a-row (Omok).' }, store:'' },
+  { id:'komok',    e:'⚪', name:{ ko:'하랑 K-Omok', en:'Harang K-Omok' }, desc:{ ko:'다섯 개를 먼저 잇는 한국식 오목.', en:'Korean-style five-in-a-row (Omok).' }, store:'https://chromewebstore.google.com/detail/alfljjknfdkmfceafblacmcjmpdegibj' },
   { id:'kyut',     e:'🎋', name:{ ko:'하랑 K-Yut', en:'Harang K-Yut' }, desc:{ ko:'가마니 위에서 즐기는 전통 윷놀이. 청팀 vs 홍팀!', en:'Traditional Korean Yut on a straw mat — play against Team Korea.' }, store:'' }
 ];
 
